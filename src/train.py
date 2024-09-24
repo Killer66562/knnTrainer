@@ -1,5 +1,4 @@
 from typing import Any
-from xgboost.callback import TrainingCallback
 from datetime import datetime, timezone, timedelta
 
 import argparse
@@ -7,22 +6,9 @@ import logging
 import sklearn.metrics
 import sklearn.model_selection
 from sklearn.neighbors import KNeighborsClassifier
-import xgboost
 import sklearn
 import joblib
 import pandas as pd
-
-
-class CustomCallback(TrainingCallback):
-    def __init__(self, iters_per_log: int, max_iters: int) -> None:
-        super().__init__()
-        self._iters_per_log = iters_per_log
-        self._max_iters = max_iters
-
-    def after_iteration(self, model: Any, epoch: int, evals_log: xgboost.callback.Dict[str, xgboost.callback.Dict[str, xgboost.callback.List[float] | xgboost.callback.List[xgboost.callback.Tuple[float]]]]) -> bool:
-        if epoch % self._iters_per_log == 0:
-            logging.info(f"epoch: {epoch} / {self._max_iters}")
-        return False
 
 
 def main():
