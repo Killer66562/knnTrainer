@@ -61,7 +61,7 @@ def main():
     model = KNeighborsClassifier(
         n_neighbors=args.nn
     )
-    model.fit(x_train_df.values, y_train_df.values)
+    model.fit(x_train_df.values, y_train_df.values.ravel())
     
     logging.info("Done!")
 
